@@ -1,0 +1,60 @@
+USE [MiU]
+GO
+
+/****** Object:  StoredProcedure [dbo].[UPdate_Product]    Script Date: 12/14/2012 17:06:15 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+create PROCEDURE  [dbo].[UPdate_Product]
+
+
+
+@Prd_ID int
+,@Prd_code varchar(20)
+,@Prd_name varchar(50)
+,@prd_dlina float
+,@prd_shir float
+,@prd_visota float
+,@prd_ves float
+,@prd_cena float
+,@prd_armor float
+
+AS  
+  begin
+
+
+set @Prd_ID = @Prd_ID
+set @Prd_code = @Prd_code
+set @Prd_name = @Prd_name
+set @prd_dlina = @prd_dlina
+set @prd_shir = @prd_shir
+set @prd_visota = @prd_visota
+set @prd_ves = @prd_ves
+set @prd_cena = @prd_cena
+set @prd_armor = @prd_armor
+
+
+
+
+
+update [MiU].[dbo].[MiU_Product]
+set 
+
+Prd_code = @Prd_code
+,Prd_name = @Prd_name
+,prd_dlina = @prd_dlina
+,prd_shir = @prd_shir
+,prd_visota = @prd_visota
+,prd_ves = @prd_ves
+,prd_cena = @prd_cena
+,prd_armor = @prd_armor
+where Prd_ID = @Prd_ID
+  
+  end
+GO
+
+

@@ -1,0 +1,42 @@
+USE [MiU]
+GO
+
+/****** Object:  StoredProcedure [dbo].[UPdate_Kabinet]    Script Date: 12/14/2012 17:06:09 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+CREATE PROCEDURE  [dbo].[UPdate_Kabinet]
+
+@kab_ID int
+,@kab_Nkab varchar(50)
+,@kab_Tipkab varchar(50)
+,@kab_perID int
+AS  
+  begin
+
+
+set @kab_ID= @kab_ID
+set @kab_Nkab = @kab_Nkab
+set @kab_Tipkab = @kab_Tipkab
+set @kab_perID = @kab_perID
+
+
+
+
+update [MiU].[dbo].[MiU_Kabinet]
+set 
+
+kab_Nkab = @kab_Nkab
+,kab_Tipkab = @kab_Tipkab
+,kab_perID = @kab_perID
+
+where kab_ID = @kab_ID
+  
+  end
+GO
+
+

@@ -1,0 +1,41 @@
+USE [MiU]
+GO
+
+/****** Object:  StoredProcedure [dbo].[UPdate_Person]    Script Date: 12/14/2012 17:06:12 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+create PROCEDURE  [dbo].[UPdate_Person]
+
+@per_ID int
+,@per_FIO varchar(70)
+,@per_dolzhnost varchar(50)
+,@per_compID int
+AS  
+  begin
+
+
+set @per_ID = @per_ID
+set @per_FIO = @per_FIO
+set @per_dolzhnost = @per_dolzhnost
+set @per_compID= @per_compID
+
+
+
+
+update [MiU].[dbo].[MiU_Person]
+set 
+
+per_FIO = @per_FIO
+,per_dolzhnost = @per_dolzhnost
+,per_compID = @per_compID
+where per_ID = @per_ID
+  
+  end
+GO
+
+

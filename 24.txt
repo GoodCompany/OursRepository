@@ -1,0 +1,39 @@
+USE [MiU]
+GO
+
+/****** Object:  StoredProcedure [dbo].[Create_Kabinet]    Script Date: 12/14/2012 17:05:41 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+CREATE PROCEDURE  [dbo].[Create_Kabinet]
+
+
+
+@kab_Nkab varchar(50)
+,@kab_Tipkab varchar(50)
+,@kab_perID int
+AS  
+  begin
+
+
+
+Declare @kab_ID as int
+
+
+set @kab_ID= (select MAX (kab_ID)+1 from [MiU].[dbo].[MiU_Kabinet])
+set @kab_Nkab = @kab_Nkab
+set @kab_Tipkab = @kab_Tipkab
+set @kab_perID= @kab_perID
+
+  
+  insert into [MiU].[dbo].[MiU_Kabinet](kab_ID,kab_Nkab,kab_Tipkab,kab_perID)
+  
+  values (@kab_ID,@kab_Nkab,@kab_Tipkab,@kab_perID)
+  end
+GO
+
+

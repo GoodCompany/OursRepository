@@ -1,0 +1,49 @@
+USE [MiU]
+GO
+
+/****** Object:  StoredProcedure [dbo].[sp_otchet_dogovor]    Script Date: 12/14/2012 17:05:59 ******/
+SET ANSI_NULLS OFF
+GO
+
+SET QUOTED_IDENTIFIER OFF
+GO
+
+CREATE PROCEDURE [dbo].[sp_otchet_dogovor] 
+(@orderid int)
+AS
+
+
+select
+dbo.MiU_Dogovor.dg_name
+,dogovor.cmp_Name
+,convert (varchar (10),dbo.MiU_Dogovor.dg_dateOut,104)
+,DATEDIFF(day, dbo.MiU_Dogovor.dg_dateOut, GETDATE()) *-1
+,dbo.MiU_Product.Prd_code
+,dbo.MiU_Product.Prd_name
+,dbo.MiU_Stock.stk_Quantity
+,isnull (post.cmp_Name,'-')
+,dbo.MiU_Product.prd_armor
+,DATEDIFF(month, dbo.MiU_Stock.stk_dateIN, GETDATE()) * dbo.MiU_Product.prd_armor AS tekushiy_armor
+,DATEDIFF(day, dbo.MiU_Dogovor.dg_dateOut, GETDATE()) *-1*dbo.MiU_Product.prd_armor AS konechniy_armor
+,dbo.MiU_Product.prd_cena 
+,dbo.MiU_Dogovor.dg_cena
+,dogovor.cmp_Reyting
+
+
+
+
+
+
+FROM dbo.MiU_Stock WITH (nolock) 
+INNER JOIN dbo.MiU_Kabinet WITH (nolock) ON dbo.MiU_Stock.stk_kabID = dbo.MiU_Kabinet.kab_ID 
+INNER JOIN dbo.MiU_Product WITH (nolock) ON dbo.MiU_Stock.stk_prdID = dbo.MiU_Product.Prd_ID 
+LEFT OUTER JOIN dbo.MiU_Dogovor WITH (nolock) ON dbo.MiU_Stock.stk_dgID = dbo.MiU_Dogovor.dg_ID 
+LEFT OUTER JOIN dbo.MiU_Company post WITH (nolock) ON post.cmp_ID = dbo.MiU_Stock.stk_cmpID
+LEFT OUTER JOIN dbo.MiU_Company  dogovor WITH (nolock) ON dogovor.cmp_ID = dbo.MiU_Dogovor.dg_compID
+
+where dg_ID is not null
+
+order by 1
+GO
+
+

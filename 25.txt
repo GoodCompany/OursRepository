@@ -1,0 +1,39 @@
+USE [MiU]
+GO
+
+/****** Object:  StoredProcedure [dbo].[Create_Person]    Script Date: 12/14/2012 17:05:45 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+CREATE PROCEDURE  [dbo].[Create_Person]
+
+
+
+@per_FIO varchar(70)
+,@per_dolzhnost varchar(50)
+,@per_compID int
+AS  
+  begin
+
+
+
+Declare @per_ID as int
+
+
+set @per_ID = (select MAX (per_ID)+1 from [MiU].[dbo].[MiU_Person])
+set @per_FIO = @per_FIO
+set @per_dolzhnost = @per_dolzhnost
+set @per_compID= @per_compID
+
+  
+  insert into [MiU].[dbo].[MiU_Person](per_ID,per_FIO,per_dolzhnost,per_compID)
+  
+  values (@per_ID,@per_FIO,@per_dolzhnost,@per_compID)
+  end
+GO
+
+

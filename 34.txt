@@ -1,0 +1,63 @@
+USE [MiU]
+GO
+
+/****** Object:  StoredProcedure [dbo].[UPdate_Stock]    Script Date: 12/14/2012 17:06:20 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+CREATE PROCEDURE  [dbo].[UPdate_Stock]
+
+
+
+@stk_ID int
+,@stk_kabID int
+,@stk_dgID int
+
+
+AS  
+  begin
+  
+
+Declare @log_ID as int
+Declare @stk_prdID as int
+Declare @stk_cmpID as int
+Declare @log_kabIDin as int
+Declare @stk_Quantity as int
+
+
+
+set @stk_ID = @stk_ID
+set @stk_kabID = @stk_kabID
+set @stk_dgID = @stk_dgID 
+
+set @log_ID = (select MAX (log_ID)+1 from [MiU].[dbo].[MiU_Log])
+set @stk_prdID = (select stk_prdID from [MiU].[dbo].[MiU_Stock] where stk_ID = @stk_ID)
+set @stk_cmpID = (select stk_cmpID from [MiU].[dbo].[MiU_Stock] where stk_ID = @stk_ID)
+set @log_kabIDin = (select stk_kabID from [MiU].[dbo].[MiU_Stock] where stk_ID = @stk_ID)
+set @stk_Quantity = (select stk_Quantity from [MiU].[dbo].[MiU_Stock] where stk_ID = @stk_ID)
+
+
+
+
+insert into [MiU].[dbo].[MiU_Log](log_ID,log_prdID,log_compID,log_kabIDin,log_kabIDout,log_dogovorID,log_datetime,log_Quantity,log_operID)
+  
+values (@log_ID,@stk_prdID,@stk_cmpID,@log_kabIDin,@stk_kabID,@stk_dgID,getdate(),@stk_Quantity,3)
+
+
+
+
+update [MiU].[dbo].[MiU_Stock]
+set 
+stk_kabID = @stk_kabID
+,stk_dgID = @stk_dgID 
+
+where stk_ID = @stk_ID
+  
+  end
+GO
+
+

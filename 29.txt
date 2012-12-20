@@ -1,0 +1,54 @@
+USE [MiU]
+GO
+
+/****** Object:  StoredProcedure [dbo].[UPdate_Cmp]    Script Date: 12/14/2012 17:06:03 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+CREATE PROCEDURE  [dbo].[UPdate_Cmp]
+
+
+@cmp_ID int
+,@cmp_Code varchar(20)
+,@cmp_Name varchar(70)
+,@cmp_Address varchar(100)
+,@cmp_Rekvizit varchar(100)
+,@cmp_TipCmpID int
+,@cmp_Reyting int
+AS  
+  begin
+
+
+
+
+
+set @cmp_ID = @cmp_ID
+set @cmp_Code = @cmp_Code
+set @cmp_Name = @cmp_Name
+set @cmp_Address = @cmp_Address
+set @cmp_Rekvizit = @cmp_Rekvizit
+set @cmp_TipCmpID = @cmp_TipCmpID
+set @cmp_Reyting = @cmp_Reyting 
+
+
+
+
+update [MiU].[dbo].[MiU_Company]
+set 
+cmp_Code = @cmp_Code
+,cmp_Name = @cmp_Name
+,cmp_Address = @cmp_Address
+,cmp_Rekvizit = @cmp_Rekvizit
+,cmp_TipCmpID = @cmp_TipCmpID
+,cmp_Reyting =  @cmp_Reyting 
+
+where cmp_ID = @cmp_ID
+  
+  end
+GO
+
+

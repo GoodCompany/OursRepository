@@ -1,0 +1,48 @@
+USE [MiU]
+GO
+
+/****** Object:  StoredProcedure [dbo].[Create_Product]    Script Date: 12/14/2012 17:05:49 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+CREATE PROCEDURE  [dbo].[Create_Product]
+
+@Prd_code varchar(20)
+,@Prd_name varchar(50)
+,@prd_dlina float
+,@prd_shir float
+,@prd_visota float
+,@prd_ves float
+,@prd_cena float
+,@prd_armor float
+
+AS  
+  begin
+
+
+
+Declare @Prd_ID as int
+
+
+set @Prd_ID = (select MAX (Prd_ID)+1 from [MiU].[dbo].[MiU_Product])
+set @Prd_code = @Prd_code
+set @Prd_name = @Prd_name
+set @prd_dlina = @prd_dlina
+set @prd_shir = @prd_shir
+set @prd_visota = @prd_visota
+set @prd_ves = @prd_ves
+set @prd_cena = @prd_cena
+set @prd_armor = @prd_armor
+
+  
+  insert into [MiU].[dbo].[MiU_Product](Prd_ID,Prd_code,Prd_name,prd_dlina,prd_shir,prd_visota,prd_ves,prd_cena,prd_armor)
+  
+  values (@Prd_ID,@Prd_code,@Prd_name,@prd_dlina,@prd_shir,@prd_visota,@prd_ves,@prd_cena,@prd_armor)
+  end
+GO
+
+

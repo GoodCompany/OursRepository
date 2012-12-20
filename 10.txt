@@ -1,0 +1,48 @@
+USE [MiU]
+GO
+
+/****** Object:  Table [dbo].[MiU_Stock]    Script Date: 12/14/2012 16:47:21 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[MiU_Stock](
+	[stk_ID] [int] NOT NULL,
+	[stk_kabID] [int] NOT NULL,
+	[stk_prdID] [int] NOT NULL,
+	[stk_Quantity] [int] NOT NULL,
+	[stk_dgID] [int] NULL,
+	[stk_dateIN] [datetime] NULL,
+	[stk_cmpID] [int] NULL,
+ CONSTRAINT [PK_MiU_Stok] PRIMARY KEY CLUSTERED 
+(
+	[stk_ID] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+ALTER TABLE [dbo].[MiU_Stock]  WITH CHECK ADD  CONSTRAINT [FK_MiU_Stok_Miu_dogovor] FOREIGN KEY([stk_dgID])
+REFERENCES [dbo].[MiU_Dogovor] ([dg_ID])
+GO
+
+ALTER TABLE [dbo].[MiU_Stock] CHECK CONSTRAINT [FK_MiU_Stok_Miu_dogovor]
+GO
+
+ALTER TABLE [dbo].[MiU_Stock]  WITH CHECK ADD  CONSTRAINT [FK_MiU_Stok_MiU_Kabinet] FOREIGN KEY([stk_kabID])
+REFERENCES [dbo].[MiU_Kabinet] ([kab_ID])
+GO
+
+ALTER TABLE [dbo].[MiU_Stock] CHECK CONSTRAINT [FK_MiU_Stok_MiU_Kabinet]
+GO
+
+ALTER TABLE [dbo].[MiU_Stock]  WITH CHECK ADD  CONSTRAINT [FK_MiU_Stok_MiU_Product] FOREIGN KEY([stk_prdID])
+REFERENCES [dbo].[MiU_Product] ([Prd_ID])
+GO
+
+ALTER TABLE [dbo].[MiU_Stock] CHECK CONSTRAINT [FK_MiU_Stok_MiU_Product]
+GO
+
+

@@ -1,0 +1,85 @@
+USE [MiU]
+GO
+
+/****** Object:  Table [dbo].[MiU_Log]    Script Date: 12/14/2012 16:47:07 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[MiU_Log](
+	[log_ID] [int] NOT NULL,
+	[log_prdID] [int] NOT NULL,
+	[log_compID] [int] NULL,
+	[log_kabIDin] [int] NULL,
+	[log_kabIDout] [int] NULL,
+	[log_dogovorID] [int] NULL,
+	[log_datetime] [datetime] NULL,
+	[log_Quantity] [int] NULL,
+	[log_prim] [varchar](50) NULL,
+	[log_operID] [int] NULL,
+ CONSTRAINT [PK_MiU_Log] PRIMARY KEY CLUSTERED 
+(
+	[log_ID] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+ALTER TABLE [dbo].[MiU_Log]  WITH NOCHECK ADD  CONSTRAINT [FK_MiU_Log_MiU_Company] FOREIGN KEY([log_compID])
+REFERENCES [dbo].[MiU_Company] ([cmp_ID])
+GO
+
+ALTER TABLE [dbo].[MiU_Log] CHECK CONSTRAINT [FK_MiU_Log_MiU_Company]
+GO
+
+ALTER TABLE [dbo].[MiU_Log]  WITH NOCHECK ADD  CONSTRAINT [FK_MiU_Log_Miu_dogovor] FOREIGN KEY([log_dogovorID])
+REFERENCES [dbo].[MiU_Dogovor] ([dg_ID])
+GO
+
+ALTER TABLE [dbo].[MiU_Log] CHECK CONSTRAINT [FK_MiU_Log_Miu_dogovor]
+GO
+
+ALTER TABLE [dbo].[MiU_Log]  WITH NOCHECK ADD  CONSTRAINT [FK_MiU_Log_MiU_Kabinet] FOREIGN KEY([log_kabIDin])
+REFERENCES [dbo].[MiU_Kabinet] ([kab_ID])
+GO
+
+ALTER TABLE [dbo].[MiU_Log] CHECK CONSTRAINT [FK_MiU_Log_MiU_Kabinet]
+GO
+
+ALTER TABLE [dbo].[MiU_Log]  WITH NOCHECK ADD  CONSTRAINT [FK_MiU_Log_MiU_Kabinet1] FOREIGN KEY([log_kabIDout])
+REFERENCES [dbo].[MiU_Kabinet] ([kab_ID])
+GO
+
+ALTER TABLE [dbo].[MiU_Log] CHECK CONSTRAINT [FK_MiU_Log_MiU_Kabinet1]
+GO
+
+ALTER TABLE [dbo].[MiU_Log]  WITH CHECK ADD  CONSTRAINT [FK_MiU_Log_MiU_Log] FOREIGN KEY([log_ID])
+REFERENCES [dbo].[MiU_Log] ([log_ID])
+GO
+
+ALTER TABLE [dbo].[MiU_Log] CHECK CONSTRAINT [FK_MiU_Log_MiU_Log]
+GO
+
+ALTER TABLE [dbo].[MiU_Log]  WITH CHECK ADD  CONSTRAINT [FK_MiU_Log_MiU_Oper] FOREIGN KEY([log_operID])
+REFERENCES [dbo].[MiU_Oper] ([oper_ID])
+GO
+
+ALTER TABLE [dbo].[MiU_Log] CHECK CONSTRAINT [FK_MiU_Log_MiU_Oper]
+GO
+
+ALTER TABLE [dbo].[MiU_Log]  WITH NOCHECK ADD  CONSTRAINT [FK_MiU_Log_MiU_Product] FOREIGN KEY([log_prdID])
+REFERENCES [dbo].[MiU_Product] ([Prd_ID])
+GO
+
+ALTER TABLE [dbo].[MiU_Log] CHECK CONSTRAINT [FK_MiU_Log_MiU_Product]
+GO
+
+

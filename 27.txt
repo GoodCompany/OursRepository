@@ -1,0 +1,60 @@
+USE [MiU]
+GO
+
+/****** Object:  StoredProcedure [dbo].[delete_Stock]    Script Date: 12/14/2012 17:05:56 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+create PROCEDURE  [dbo].[delete_Stock]
+
+
+
+@stk_ID int
+
+
+
+AS  
+  begin
+  
+
+Declare @log_ID as int
+Declare @stk_prdID as int
+Declare @stk_cmpID as int
+Declare @log_kabIDin as int
+Declare @stk_Quantity as int
+Declare @stk_dgID as int
+
+
+
+
+set @stk_ID = @stk_ID
+
+
+set @log_ID = (select MAX (log_ID)+1 from [MiU].[dbo].[MiU_Log])
+set @stk_prdID = (select stk_prdID from [MiU].[dbo].[MiU_Stock] where stk_ID = @stk_ID)
+set @stk_cmpID = (select stk_cmpID from [MiU].[dbo].[MiU_Stock] where stk_ID = @stk_ID)
+set @log_kabIDin = (select stk_kabID from [MiU].[dbo].[MiU_Stock] where stk_ID = @stk_ID)
+set @stk_Quantity = (select stk_Quantity from [MiU].[dbo].[MiU_Stock] where stk_ID = @stk_ID)
+set @stk_dgID = (select stk_dgID from [MiU].[dbo].[MiU_Stock] where stk_ID = @stk_ID)
+
+
+
+
+insert into [MiU].[dbo].[MiU_Log](log_ID,log_prdID,log_compID,log_kabIDin,log_dogovorID,log_datetime,log_Quantity,log_operID)
+  
+values (@log_ID,@stk_prdID,@stk_cmpID,@log_kabIDin,@stk_dgID,getdate(),@stk_Quantity,2)
+
+
+
+
+
+delete from [MiU].[dbo].[MiU_Stock] where stk_ID= @stk_ID
+  
+  end
+GO
+
+

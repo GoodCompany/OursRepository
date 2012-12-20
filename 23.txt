@@ -1,0 +1,49 @@
+USE [MiU]
+GO
+
+/****** Object:  StoredProcedure [dbo].[Create_Dogovor]    Script Date: 12/14/2012 17:05:34 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+CREATE PROCEDURE  [dbo].[Create_Dogovor]
+
+
+@dg_name varchar(50)
+,@dg_compID int
+,@dg_dateIN datetime
+,@dg_dateOut datetime
+,@dg_cena float
+
+
+
+
+AS  
+  begin
+
+
+
+Declare @dg_ID as int
+
+
+set @dg_ID= (select MAX (dg_ID)+1 from [MiU].[dbo].[MiU_Dogovor])
+
+set @dg_name = @dg_name 
+set @dg_compID = @dg_compID 
+set @dg_dateIN = @dg_dateIN
+set @dg_dateOut = @dg_dateOut
+set @dg_cena = @dg_cena
+
+
+
+  
+  insert into [MiU].[dbo].[MiU_Dogovor](dg_ID,dg_name,dg_compID,dg_dateIN,dg_dateOut,dg_cena)
+  
+  values (@dg_ID,@dg_name,@dg_compID,@dg_dateIN,@dg_dateOut,@dg_cena)
+  end
+GO
+
+

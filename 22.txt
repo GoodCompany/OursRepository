@@ -1,0 +1,44 @@
+USE [MiU]
+GO
+
+/****** Object:  StoredProcedure [dbo].[Create_Cmp]    Script Date: 12/14/2012 17:05:27 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+CREATE PROCEDURE  [dbo].[Create_Cmp]
+
+
+
+@cmp_Code varchar(20)
+,@cmp_Name varchar(70)
+,@cmp_Address varchar(100)
+,@cmp_Rekvizit varchar(100)
+,@cmp_TipCmpID int
+,@cmp_Reyting int
+AS  
+  begin
+
+
+
+Declare @cmp_ID as int
+
+
+set @cmp_ID = (select MAX (cmp_ID)+1 from [MiU].[dbo].[MiU_Company])
+set @cmp_Code = @cmp_Code
+set @cmp_Name = @cmp_Name
+set @cmp_Address = @cmp_Address
+set @cmp_Rekvizit = @cmp_Rekvizit
+set @cmp_TipCmpID = @cmp_TipCmpID 
+set @cmp_Reyting  = @cmp_Reyting
+  
+  insert into [MiU].[dbo].[MiU_Company](cmp_ID,cmp_Code,cmp_Name,cmp_Address,cmp_Rekvizit,cmp_TipCmpID,cmp_Reyting)
+  
+  values (@cmp_ID,@cmp_Code,@cmp_Name,@cmp_Address,@cmp_Rekvizit,@cmp_TipCmpID,@cmp_Reyting)
+  end
+GO
+
+

@@ -1,0 +1,40 @@
+USE [MiU]
+GO
+
+/****** Object:  Table [dbo].[MiU_Company]    Script Date: 12/14/2012 16:41:19 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[MiU_Company](
+	[cmp_ID] [int] NOT NULL,
+	[cmp_TipCmpID] [int] NULL,
+	[cmp_Code] [varchar](20) NULL,
+	[cmp_Name] [varchar](70) NULL,
+	[cmp_Address] [varchar](100) NULL,
+	[cmp_Rekvizit] [varchar](100) NULL,
+	[cmp_Reyting] [int] NULL,
+ CONSTRAINT [PK_MiU_Company] PRIMARY KEY CLUSTERED 
+(
+	[cmp_ID] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+ALTER TABLE [dbo].[MiU_Company]  WITH CHECK ADD  CONSTRAINT [FK_MiU_Company_MiU_TipComp] FOREIGN KEY([cmp_TipCmpID])
+REFERENCES [dbo].[MiU_TipComp] ([TipComp_ID])
+GO
+
+ALTER TABLE [dbo].[MiU_Company] CHECK CONSTRAINT [FK_MiU_Company_MiU_TipComp]
+GO
+
+
